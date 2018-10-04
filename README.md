@@ -1,3 +1,7 @@
+# MNML
+
+Minimalistic social network built with ReactJS, Redux, SocketIO, Express, SQL, CSS, Html
+
 # Using this repo in development
 
 The `src` directory is where all of your client-side Javascript code should live. The file `src/start.js` is the entry point for your React application. All other files you use will either be imported by `start.js` or imported by files that are imported `start.js` (or imported by files that are imported by files that are imported by `start.js`, etc.).
