@@ -1,12 +1,30 @@
-const knox = require('knox');
 const fs = require('fs');
 
 let secrets;
 if (process.env.NODE_ENV == 'production') {
     secrets = process.env; // in prod the secrets are environment variables
 } else {
-    secrets = require('./secrets'); // secrets.json is in .gitignore
+    try {
+        secrets = require('./secrets'); // secrets.json is in .gitignore
+    } catch (e) {
+        secrets = null; // no AWS credentials - keep uploads on local disk
+    }
 }
+
+if (!secrets || !secrets.AWS_KEY || !secrets.AWS_SECRET) {
+    console.log('No AWS credentials found - storing uploads locally in /uploads');
+    exports.upload = function(req, res, next) {
+        if (!req.file) {
+            return res.json({
+                error: true
+            });
+        }
+        next();
+    };
+    return;
+}
+
+const knox = require('knox');
 
 const client = knox.createClient({
     key: secrets.AWS_KEY,

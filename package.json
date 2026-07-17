@@ -48,6 +48,11 @@
         "webpack": "^1.14.0",
         "webpack-dev-middleware": "^1.8.4"
     },
+    "overrides": {
+        "spiced-pg": {
+            "pg": "^8"
+        }
+    },
     "keywords": [],
     "author": "",
     "license": "ISC",

@@ -10,6 +10,7 @@ const server = require('http').Server(app);
 const io = require('socket.io')(server, { origins: 'localhost:8080' });
 
 app.use(express.static('public'));
+app.use('/uploads', express.static(__dirname + '/uploads'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(compression());
